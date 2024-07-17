@@ -1,46 +1,49 @@
-import React, {useState } from "react";
-function App() {
+import React, { useState } from 'react';
 
-  const [data1, setData1] = useState(null);
-  const [data2, setData2] = useState(null);
-  // const [data, setData] = useEffect(null);?\
-  const [show, SetShow] = useState(false);
-  
-  function getData1(val1){
-    setData1(val1.target.value)
-    SetShow(false)
-  }
-  function getData2(val2){
-    setData2(val2.target.value)
-    SetShow(false)
-  }
+const NameForm = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (firstName && lastName) {
+      setFullName(`${firstName} ${lastName}`);
+    } else {
+      alert('Please fill in both first and last name.');
+    }
+  };
 
   return (
-    <div className="App">
-      <form>
-        <h2>Full Name Display</h2>
-        <label for="name">First Name:</label>
-        <input type="text" id="fname" onChange={getData1} required/>
-        <br/> <br/>
-        <label for="name">Last Name:</label>
-        <input type="text" id="lname" onChange={getData2} required/>
-        <br/>        <br/>
-        <button 
-          type="submit" 
-          onClick={(e) => {
-            SetShow(true);
-            e.preventDefault();
-        }}>
-          Submit
-        </button>
+    <div>
+      <form onSubmit={handleSubmit}>
+      <h2>Full Name Display</h2>
+        <lable>First Name: </lable>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <br />
+        <br />
+        <lable>Last Name: </lable>
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+        <br />
+        <br />
+        <button type="submit">Submit</button>
       </form>
-      {
-        show? 
-        <p><label>Full Name: </label>{data1 +" " + data2}</p>
-        :null
-      }
+      
+      { fullName && <p> <label>Full Name: </label> {fullName}</p>}
     </div>
   );
-}
+};
 
-export default App;
+export default NameForm;
