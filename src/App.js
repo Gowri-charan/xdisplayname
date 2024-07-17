@@ -22,7 +22,7 @@ function App() {
         <label for="name">First Name:</label>
         <input type="text" id="fname" onChange={getData1} required/>
         <br/> <br/>
-        <label for="name">First Name:</label>
+        <label for="name">Last Name:</label>
         <input type="text" id="lname" onChange={getData2} required/>
         <br/>        <br/>
         <button 
