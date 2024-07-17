@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
+import React, {useState } from "react";
+function App() {
 
-const NameForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [fullName, setFullName] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (firstName && lastName) {
-      setFullName(`${firstName} ${lastName}`);
-    } else {
-      alert('Please fill in both first and last name.');
-    }
-  };
+  const [data1, setData1] = useState(null);
+  const [data2, setData2] = useState(null);
+  // const [data, setData] = useEffect(null);?\
+  const [show, SetShow] = useState(false);
+  
+  function getData1(val1){
+    setData1(val1.target.value)
+    SetShow(false)
+  }
+  function getData2(val2){
+    setData2(val2.target.value)
+    SetShow(false)
+  }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <button type="submit">Submit</button>
+    <div className="App">
+      <form>
+        <h2>Full Name Display</h2>
+        <label for="name">First Name:</label>
+        <input type="text" id="fname" onChange={getData1} required/>
+        <br/> <br/>
+        <label for="name">First Name:</label>
+        <input type="text" id="lname" onChange={getData2} required/>
+        <br/>        <br/>
+        <button 
+          type="submit" 
+          onClick={(e) => {
+            SetShow(true);
+            e.preventDefault();
+        }}>
+          Submit
+        </button>
       </form>
-      {fullName && <p>{fullName}</p>}
+      {
+        show? 
+        <p><label>Full Name: </label>{data1 +" " + data2}</p>
+        :null
+      }
     </div>
   );
-};
+}
 
-export default NameForm;
+export default App;
